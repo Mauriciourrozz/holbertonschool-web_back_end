@@ -1,7 +1,9 @@
 export default function appendToEachArrayValue(array, appendString) {
-  const newArray = [...array]; // Se hace una copia del array para evitar modificar el original
-  for (const value of newArray) {
-    newArray[value] = appendString + value;
+  const nuevoArray = []; // creamos el array vacio
+  for (const value of array) { // value toma cada valor del array que se pasa
+    nuevoArray.push(appendString + value); // se concatena value + appenString
+    // y se guarda en nuevoarray mediante metodo push
   }
-  return newArray;
+
+  return nuevoArray; // se retorna el nuevo array
 }
