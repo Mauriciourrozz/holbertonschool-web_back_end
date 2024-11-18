@@ -10,9 +10,9 @@ export default class Airport {
     } else {
       this._code = code;
     }
-    
   }
+
   toString() {
-    return `[Object ${this._code}]`;
+    return `[object ${this._code}]`;
   }
 }
