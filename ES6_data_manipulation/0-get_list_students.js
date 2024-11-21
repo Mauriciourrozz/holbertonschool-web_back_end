@@ -1,4 +1,11 @@
 export default function getListStudents() {
+  class student {
+    constructor(id, firstName, location) {
+      this.id = id;
+      this.firstName = firstName;
+      this.location = location
+    }
+  }
   return [
     {
       id: 1,
