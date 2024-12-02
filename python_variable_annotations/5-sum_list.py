@@ -4,11 +4,9 @@ This file return a sum of all elements of a list
 """
 
 
-def sum_list(input_list: float) -> float:
+def sum_list(input_list: list[float]) -> float:
     """
     This file return a sum of all elements of a list
     """
-    suma: int = 0
-    for i in input_list:
-        suma += i
+    suma = sum(input_list)
     return suma
