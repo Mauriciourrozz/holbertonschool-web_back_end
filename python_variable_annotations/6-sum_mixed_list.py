@@ -8,6 +8,8 @@ from typing import List, Union
 """
 Sum all elements of a list
 """
+
+
 def sum_mixed_list(mxd_lst: List[Union[int, float]]) -> float:
     suma = sum(mxd_lst)
     return suma
