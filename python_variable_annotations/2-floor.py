@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This function return a floor of an float to int
+This function return a floor of a float to int
 """
 
 
