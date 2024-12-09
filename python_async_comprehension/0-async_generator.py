@@ -7,6 +7,7 @@ This is a file that contains a function
 import asyncio
 import random
 
+
 async def async_generator():
     """
     Function that does not receive arguments and is responsible for generating
