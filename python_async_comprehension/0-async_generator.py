@@ -11,10 +11,10 @@ from typing import AsyncGenerator
 
 async def async_generator() -> AsyncGenerator[float, None]:
     """
-    Function that does not receive arguments and is responsible for generating
-    a random number between 0 and 10 every one second and returns it
+    Generates 10 random numbers between 0 and 10 asynchronously.
+
+    Returns: AsyncGenerator[float, None]: Random numbers generated.
     """
     for i in range(10):
         await asyncio.sleep(1)
-        num = random.uniform(0, 10)
-        yield num
+        yield random.uniform(0, 10)
