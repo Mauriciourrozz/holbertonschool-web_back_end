@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+This file contains a class and methods
+"""
 import csv
 import math
 from typing import List
