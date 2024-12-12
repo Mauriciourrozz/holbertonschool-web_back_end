@@ -3,6 +3,7 @@ import csv
 import math
 from typing import List
 
+
 def index_range(page: int, page_size: int) -> tuple[int, int]:
     """
     Calculate the range of indexes for paginating data.
@@ -25,6 +26,7 @@ def index_range(page: int, page_size: int) -> tuple[int, int]:
 
     tupla = (start, end)
     return tupla
+
 
 class Server:
     """Server class to paginate a database of popular baby names.
