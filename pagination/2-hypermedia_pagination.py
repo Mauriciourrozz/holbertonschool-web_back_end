@@ -80,7 +80,16 @@ class Server:
         Returns a dictionary of hyperlinks to the given page
         and page size in the given page
         """
-        data, next_page, prev_page, total_page = self.get_page(page, page_size)
-        return {'page_size': len(data), 'page': int(page), 'data': data,
-                'prev_page': prev_page, 'next_page': next_page,
-                'total_pages': total_page}
+        data_set = self.get_page(page, page_size)
+
+        long = len(self.dataset())
+        paginas = math.ceil(long / page_size)
+
+        return {
+            "page_size": len(data_set),
+            "page": page,
+            "data": data_set,
+            "next_page": page + 1 if page < paginas else None,
+            "prev_page": page - 1 if page > 1 else None,
+            "total_pages": paginas
+        }
