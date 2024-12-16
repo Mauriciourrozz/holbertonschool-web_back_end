@@ -19,4 +19,4 @@ def update_topics(mongo_collection, name, topics):
     """
     nombre = {"name": name}
     tema = {"$set": {"topics": topics}}
-    return mongo_collection.updatea_many(nombre, tema)
+    return mongo_collection.update_many(nombre, tema)
