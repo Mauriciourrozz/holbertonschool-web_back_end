@@ -105,32 +105,27 @@ class Server:
         Returns:
             dict: Contains the page data and metadata.
         """
-        assert isinstance(index, int) and index >= 0
+        assert index is not None and index >= 0, "index must be non-negative"
 
-        dataset = self.indexed_dataset()
-        sorted_keys = sorted(dataset.keys())
+        indexed_dataset = self.indexed_dataset()
+        assert index < len(indexed_dataset), "index out of range"
 
-        if index >= len(sorted_keys):
-            return {
-                "index": index,
-                "data": [],
-                "page_size": 0,
-                "next_index": None
-            }
+        data = []
+        current_index = index
+        for _ in range(page_size):
+            while current_index not in indexed_dataset:
+                current_index += 1
+                if current_index >= len(indexed_dataset):
+                    break
+            if current_index >= len(indexed_dataset):
+                break
+            data.append(indexed_dataset[current_index])
+            current_index += 1
 
-        index = next((key for key in sorted_keys if key >= index), None)
-
-        start_pos = sorted_keys.index(index)
-        selected_keys = sorted_keys[start_pos:start_pos + page_size]
-        data = [dataset[key] for key in selected_keys]
-
-        next_index = (sorted_keys[start_pos + page_size]
-                    if start_pos + page_size < len(sorted_keys)
-                    else None)
-
+        next_index = current_index
         return {
             "index": index,
             "data": data,
-            "page_size": len(data),
-            "next_index": next_index
+            "page_size": page_size,
+            "next_index": next_index,
         }
