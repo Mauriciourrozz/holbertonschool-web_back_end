@@ -1,2 +1,6 @@
 // Insert a document in the collection school
-mongo my_db --eval 'db.school.insertOne({ name: "escuela Holberton" })'
+const result = db.school.insertOne({
+  name: "Holberton school"
+});
+
+print("WriteResult({ \"nInserted\" : " + (result.acknowledged ? 1 : 0) + " })");
