@@ -38,6 +38,7 @@ class Server:
 
     def __init__(self):
         self.__dataset = None
+        self.__indexed_dataset = None
 
     def dataset(self) -> List[List]:
         """Cached dataset
@@ -50,49 +51,16 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def indexed_dataset(self) -> Dict[int, List]:
+        """Dataset indexed by sorting position, starting at 0
         """
-        Returns a specific page of data from the dataset.
-
-        Arguments:
-            page (int): The page number to retrieve
-            (1-based index). Defaults to 1.
-            page_size (int): The number of items per page.
-            Defaults to 10.
-
-        Returns:
-            List[List]: A list of rows (data) corresponding
-            to the requested page.
-            If the page is out of range (e.g.,
-            requesting a page beyond the available data),
-            returns an empty list.
-        """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
-        start, end = index_range(page, page_size)
-        dataset = self.dataset()
-        if start >= len(dataset):
-            return []
-        return dataset[start:end]
-
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """
-        Returns a dictionary of hyperlinks to the given page
-        and page size in the given page
-        """
-        data_set = self.get_page(page, page_size)
-
-        long = len(self.dataset())
-        paginas = math.ceil(long / page_size)
-
-        return {
-            "page_size": len(data_set),
-            "page": page,
-            "data": data_set,
-            "next_page": page + 1 if page < paginas else None,
-            "prev_page": page - 1 if page > 1 else None,
-            "total_pages": paginas
-        }
+        if self.__indexed_dataset is None:
+            dataset = self.dataset()
+            truncated_dataset = dataset[:1000]
+            self.__indexed_dataset = {
+                i: dataset[i] for i in range(len(dataset))
+            }
+        return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
